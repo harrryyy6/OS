@@ -89,3 +89,66 @@ printf("\nAverage Turnaround Time = %.2f\n",(float)totalTAT/n);
 return 0;
 }
 //--------------------------------------------------------------------------------------------------------
+
+//------------------------------------------------------------------------------------------
+
+
+#include <stdio.h>
+
+int main()
+{
+int pages[20]={3,4,5,6,3,4,7,3,4,5,6,7,2,4,6};
+int frames[10];
+int n=15,f,i,j;
+int pageFaults=0,pointer=0,found;
+
+printf("Enter number of frames: ");
+scanf("%d",&f);
+
+for(i=0;i<f;i++)
+frames[i]=-1;
+
+printf("\nPage\tFrames\t\tStatus\n");
+
+for(i=0;i<n;i++)
+{
+found=0;
+
+for(j=0;j<f;j++)
+{
+if(frames[j]==pages[i])
+{
+found=1;
+break;
+}
+}
+
+if(found==0)
+{
+frames[pointer]=pages[i];
+pointer=(pointer+1)%f;
+pageFaults++;
+}
+
+printf("%d\t",pages[i]);
+
+for(j=0;j<f;j++)
+{
+if(frames[j]==-1)
+printf("- ");
+else
+printf("%d ",frames[j]);
+}
+
+if(found==0)
+printf("\tYES");
+else
+printf("\tNO");
+
+printf("\n");
+}
+
+printf("\nTotal Page Faults = %d\n",pageFaults);
+
+return 0;
+}
